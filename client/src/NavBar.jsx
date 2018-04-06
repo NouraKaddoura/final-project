@@ -5,9 +5,11 @@ const NavBar = (props) => {
 	return (
 		<div className='NavBar'>
 			<Link to="/">Home</Link>
+			<Link to="/bars">Bars</Link>
 			{props.currentUser
 				? (
 					<span>
+						<Link to="/bars/new">Post New Bar</Link>
 						<Link to="/vip">VIP</Link>
 						<Link to="/logout">Log Out</Link>
 					</span>
