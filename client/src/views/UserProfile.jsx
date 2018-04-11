@@ -6,23 +6,22 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, La
 
 class UserProfile extends React.Component {
 	state = { 
-		currentUser: '',
-		posts: '',
+		user: null,
 		modalOpen: false }
 
 componentDidMount(){
 	httpClient.getMe().then((serverResponse)=>{
 		console.log(serverResponse)
 		this.setState({
-			currentUser: serverResponse.data,
+			user: serverResponse.data,
 		})
 	})
-	httpClient.getPosts(this.props.match.params.id).then((serverResponse)=>{
-		console.log(serverResponse.data) //why do I get the array of posts but the .data.title is undefined? I cannot map through it. Same with mentors.(populate?)
-		this.setState({
-			posts: serverResponse.data
-		})
-	})
+	// httpClient.getPosts(this.props.match.params.id).then((serverResponse)=>{
+	// 	console.log(serverResponse.data) //why do I get the array of posts but the .data.title is undefined? I cannot map through it. Same with mentors.(populate?)
+	// 	this.setState({
+	// 		posts: serverResponse.data
+	// 	})
+	// })
 }
 
 handleEditClick(){
@@ -38,12 +37,12 @@ handleUpdateClick(evt){
 		name: name.refs.name.value,
 		email: email.refs.email.value
 	}
-	httpClient.updateUser(this.state.currentUser._id, userFormFields)
+	httpClient.updateUser(this.state.user._id, userFormFields)
 	.then((serverResponse) => {
 		console.log(serverResponse.data)
 		this.setState({
 			modalOpen: false,
-			currentUser: serverResponse.data.user
+			user: serverResponse.data.user
 		})
 	})
 }
@@ -51,16 +50,17 @@ handleUpdateClick(evt){
 //fix logout problem
 
 handleDeleteClick(){
-	httpClient.deleteUser(this.state.currentUser._id).then((serverResponse)=>{ 
+	httpClient.deleteUser(this.state.user._id).then((serverResponse)=>{ 
 		this.props.history.push('/') 
 		
 	})
 }
 	render() {
-		const { currentUser, modalOpen } = this.state
+		const { user, modalOpen } = this.state
+		if(!user) return <h1>Loading...</h1>
 		return (
 			<div className="profilePage">	
-			<h1 style={{color:'rgba(0,0,0,.8)', margin: '10px'}}>Welcome Back, {currentUser.name}</h1>
+			<h1 style={{color:'rgba(0,0,0,.8)', margin: '10px'}}>Welcome Back, {user.name}</h1>
 			<Button onClick={this.handleEditClick.bind(this)}>Edit Profile</Button>
 			
 
@@ -75,12 +75,12 @@ handleDeleteClick(){
                       
                              <FormGroup>
                                 <Label for="name">Name</Label>
-                                <Input defaultValue={currentUser.name} ref="name" innerRef="name" type="text" id="name" />
+                                <Input defaultValue={user.name} ref="name" innerRef="name" type="text" id="name" />
                             </FormGroup>
 
                             <FormGroup>
                                 <Label for="email">Email</Label>
-                                <Input defaultValue={currentUser.email} ref="email" innerRef="email" type="text" id="imageUrl" />
+                                <Input defaultValue={user.email} ref="email" innerRef="email" type="text" id="imageUrl" />
                             </FormGroup>  
 
                     </ModalBody>
@@ -94,20 +94,27 @@ handleDeleteClick(){
 
 			
 			</div>
-				{currentUser.isMentor
+				{user.isMentor
 				? (
 					<span>
 					
-					<h4 style={{backgroundColor:'#4CAF50', color: 'white', padding: '10px'}}> Your Mentees: {currentUser.mentees}</h4>
+					<h4 style={{backgroundColor:'#4CAF50', color: 'white', padding: '10px'}}> Your Mentees: </h4>
+					{user.mentees.map((u)=>{
+						return <h1>{u.name}</h1>
+					})}
 					</span>
 				)
 				: (
 					<span>
 				
-					<h4 style={{backgroundColor:'#4CAF50', color: 'white', padding: '10px'}}> Your Mentors: {currentUser.mentors}</h4>
-					{/* {this.state.posts.map((p)=>{
-						<h1>{p.title}</h1>
-					})} */}
+					<h4 style={{backgroundColor:'#4CAF50', color: 'white', padding: '10px'}}> Your Mentors: </h4>
+					{user.mentors.map((u)=>{
+						return <h1>{u.name}</h1>
+					})}
+					
+					{this.state.user.posts.map((p)=>{
+						return <h1>{p.title}</h1>
+					})}
 					
 					</span>
 					

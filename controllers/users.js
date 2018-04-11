@@ -1,4 +1,5 @@
 const User = require('../models/User.js')
+const Post = require('../models/Post.js')
 const signToken = require('../serverAuth.js').signToken
 
 module.exports = {
@@ -62,14 +63,28 @@ module.exports = {
 
 	addMentor: (req, res) =>{
 		User.findById(req.params.id, (err, user) =>{
-			user.mentees.push(req.user._id)
-			console.log(req.params.id, req.user._id)
-			user.save((err)=> {
-				req.user.mentors.push(req.params.id)
-				req.user.save((err)=>{
-					res.json({ success: true, user})
+			if(!user.mentees.includes(req.user._id)) {
+				user.mentees.push(req.user._id)
+				console.log(req.params.id, req.user._id)
+				user.save((err)=> {
+					req.user.mentors.push(req.params.id)
+					req.user.save((err)=>{
+						res.json({ success: true, user})
+					})
+				})
+			} else {
+				res.json({ success: false, user})
+			}
+		})
+	},
+	me: (req, res) => {
+		User.findById(req.user._id)
+			.populate('mentors')
+			.populate('mentees')
+			.exec((err, user) => {
+				Post.find({ user }, (err, posts) => {
+					res.json({...user.toObject(), posts})
 				})
 			})
-		})
 	}
 }

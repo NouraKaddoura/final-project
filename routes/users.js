@@ -14,9 +14,7 @@ usersRouter.post('/authenticate', usersCtrl.authenticate)
 
 usersRouter.use(verifyToken)
 
-usersRouter.get('/me', (req, res) => {
-	res.json(req.user.toObject())
-})
+usersRouter.get('/me', usersCtrl.me)
 
 
 usersRouter.route('/:id')
