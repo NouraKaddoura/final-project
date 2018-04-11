@@ -58,5 +58,18 @@ module.exports = {
 			const token = signToken(user)
 			res.json({success: true, message: "Token attached.", token})
 		})
+	},
+
+	addMentor: (req, res) =>{
+		User.findById(req.params.id, (err, user) =>{
+			user.mentees.push(req.user._id)
+			console.log(req.params.id, req.user._id)
+			user.save((err)=> {
+				req.user.mentors.push(req.params.id)
+				req.user.save((err)=>{
+					res.json({ success: true, user})
+				})
+			})
+		})
 	}
 }

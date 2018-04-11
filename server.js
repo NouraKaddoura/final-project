@@ -8,7 +8,8 @@ const
 	MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/react-express-jwt',
 	PORT = process.env.PORT || 3001,
 	usersRoutes = require('./routes/users.js')
-	barsRoutes = require('./routes/bars.js')
+	postsRoutes = require('./routes/posts.js')
+	// mentorsRoutes = require('./routes/mentors.js')
 
 mongoose.connect(MONGODB_URI, (err) => {
 	console.log(err || `Connected to MongoDB.`)
@@ -23,7 +24,8 @@ app.get('/api', (req, res) => {
 })
 
 app.use('/api/users', usersRoutes)
-app.use('/api/bars', barsRoutes)
+// app.use('/api/mentors', mentorsRoutes)
+app.use('/api/posts', postsRoutes)
 
 app.use('*', (req, res) => {
 	res.sendFile(`${__dirname}/client/build/index.html`)

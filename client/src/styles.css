@@ -1,8 +1,139 @@
+.PostDetails{
+    background-color: white;
+    min-height: 500px;
+    max-width: 800px;
+    margin: auto;
+    padding: 10px;
+    font-family: Georgia, Times, "Times New Roman", serif;
+}
+
+ ul, dl {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    background: linear-gradient( rgba(176,244,230, .8),rgba(46,139,87, 1));
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 25px;
+    -moz-box-shadow: 0 0 80px black;
+    -webkit-box-shadow: 0 0 80px black;
+    box-shadow: 0 0 80px black;
+    min-height: 400px;
+}
+/* .profilePage {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    background: linear-gradient( rgba(176,244,230, .8),rgba(46,139,87, 1));
+    max-width: 800px;
+    margin: 0 auto;
+    -moz-box-shadow: 0 0 80px black;
+    -webkit-box-shadow: 0 0 80px black;
+    box-shadow: 0 0 80px black;
+    min-height: 400px;
+    text-align: center;
+
+} */
+
 .NavBar a, .NavBar button {
 	margin: 0 5px;
 	cursor: pointer;
 }
 
 .NavBar {
-	margin-bottom: 20px
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+
+.headline{
+	font-style: italic;
+	font-size: 30px;
+    box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.3);
+    margin-bottom: 230px;
+ 
+}
+
+.container {
+    position: relative;
+	background-image: linear-gradient(0deg,rgba(0,206,209,0.3),rgba(0,206,209,0.3)),url("https://images.pexels.com/photos/615477/pexels-photo-615477.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+	background-repeat: no-repeat;
+	background-size: 120%;
+    background-position: center;
+    min-height: 1000px;
+ 
+}
+.body{
+    background-color:black;
+}
+.footer {
+    
+    height:24px; 
+    position: absolute;
+    bottom: 0px;
+    /* background-image: none;
+    background-repeat: repeat;
+    background-position: 0% 0%; 
+    bottom: 0pt;
+    position: absolute; 
+    position:fixed; */
+
+}   
+.footer_contents {
+
+        height: 35px;
+        padding: 10px;
+        width: 97%;
+        /* padding-left: 39px;
+        -webkit-box-shadow: inset 0 0 0 2000px rgba(12, 0, 0, 0.7);
+        box-shadow: inset 0 0 0 2000px rgba(12, 0, 0, 0.7);
+        color: white;
+        position: fixed; */
+        position: absolute;
+        bottom: 0px;
+        box-shadow: inset 0 0 0 2000px rgba(12, 0, 0, 0.7);
+        color: white;
+        padding-left: 39px;
+       
+       
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #333;
+    overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: rgb(102, 193, 113);
+    color: black;
+}
+
+/* Add an active class to highlight the current page */
+.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.searchbar {
+	padding: 10px;
+	float: right;
+}
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: 0px;
+    margin-left: 0px;
+    padding: 10px;
 }

@@ -8,6 +8,7 @@ function signToken(user) {
 	// toObject() returns a basic js object with only the info from the db
 	const userData = user.toObject()
 	delete userData.password
+	//delete mentors and mentees array
 	return jwt.sign(userData, JWT_SECRET)
 }
 

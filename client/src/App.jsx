@@ -1,21 +1,28 @@
 import React from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import httpClient from './httpClient'
-
 import NavBar from './NavBar'
+import Footer from './Footer'
 import LogIn from './views/LogIn'
 import LogOut from './views/LogOut'
 import SignUp from './views/SignUp'
-import VIP from './views/VIP'
+import Users from './views/Users'
 import Home from './views/Home'
-import Bars from './views/Bars'
-import NewBar from './views/NewBar'
+import Posts from './views/Posts'
+import NewPost from './views/NewPost'
+import UserProfile from './views/UserProfile'
+import UserShow from './views/UserShow'
+import PostView from './views/PostView'
+import Autosuggest from 'react-autosuggest';
+
 
 class App extends React.Component {
 	state = { currentUser: httpClient.getCurrentUser() }
 
 	onLoginSuccess(user) {
-		this.setState({ currentUser: httpClient.getCurrentUser() })
+		this.setState({ currentUser: httpClient.getCurrentUser() }, () => {
+			this.props.history.push('/profile')
+		})
 	}
 
 	logOut() {
@@ -25,7 +32,9 @@ class App extends React.Component {
 	
 	render() {
 		const { currentUser } = this.state
+		console.log(this.props)
 		return (
+			<div className='body'>
 			<div className='App container'>
 
 				<NavBar currentUser={currentUser} />
@@ -45,27 +54,50 @@ class App extends React.Component {
 						return <SignUp {...props} onSignUpSuccess={this.onLoginSuccess.bind(this)} />
 					}} />
 
-					<Route path="/bars/new" render={(routeProps) => {
+					<Route path="/posts/new" render={(routeProps) => {
 						return currentUser
-							? <NewBar {...routeProps} />
+							? <NewPost {...routeProps} />
 							: <Redirect to="/login" />
 					}} />
 
-					<Route path="/bars" component={Bars} />
+					<Route path="/posts/:id" render={(routeProps) => {
+						return currentUser
+							? <PostView {...routeProps} />
+							: <Redirect to="/login" />
+					}} />
+
+
+					<Route path="/posts" component={Posts} />
 					
-
-					<Route path="/vip" render={() => {
+					<Route path="/users/:id" render={(routeProps)=>{
 						return currentUser
-							? <VIP />
+						? <UserShow {...routeProps}/>
+						: <Redirect to="/login" />
+					}} />
+
+					<Route path="/users" render={() => {
+						return currentUser
+							? <Users />
 							: <Redirect to="/login" />
 					}} />
 
-					<Route path="/" component={Home} />
+					<Route path="/profile" render={(props) => {
+						return currentUser
+							? <UserProfile {...props}/>
+							: <Redirect to="/login" />
+					}} />
+
+					<Route path="/" render={(props)=>{
+						return <Home {...props} onLoginSuccess={this.onLoginSuccess.bind(this)} />
+					}}  />
 
 				</Switch>
+				<Footer />
+			</div>
+			
 			</div>
 		)
 	}
 }
 
-export default App
+export default withRouter(App)

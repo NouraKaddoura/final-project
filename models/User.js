@@ -4,7 +4,10 @@ const
 	userSchema = new mongoose.Schema({
 		name: { type: String },
 		email: { type: String, required: true, unique: true },
-		password: { type: String, required: true }
+		password: { type: String, required: true },
+		isMentor: { type: Boolean },
+		mentees: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+		mentors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
 	})
 
 // adds a method to a user document object to create a hashed password

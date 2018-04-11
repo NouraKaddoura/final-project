@@ -56,13 +56,58 @@ httpClient.logOut = function() {
 }
 
 
-httpClient.getBars = function() {
-	return this({ method: 'get', url: '/api/bars'})
+httpClient.getPosts = function() {
+	return this({ method: 'get', url: '/api/posts'})
 }
 
-httpClient.createBar = function(barInfo){
-	return this({method:'post', url:'/api/bars', data: barInfo})
+httpClient.createPost = function(postInfo){
+	return this({method:'post', url:'/api/posts', data: postInfo})
 }
+
+httpClient.getPost = function(id){
+	return this({method:'get', url:`/api/posts/${id}`})
+}
+
+httpClient.updatePost = function(id, fields){
+	return this({ method: 'patch', url:`/api/posts/${id}`, data: fields})
+}
+
+
+httpClient.deletePost = function(id){
+	return this({ method: 'delete', url: `/api/posts/${id}`})
+}
+
+httpClient.addComment = function(id, fields){
+	console.log(id)
+	return this({method: 'post', url: `/api/posts/${id}/comments`, data: fields})
+}
+
+httpClient.getAllUsers = function(){
+    return this({ method: 'get', url: '/api/users'})
+}
+
+// get user method, passing in an id
+httpClient.getUser = function(id){
+	return this({method:'get', url: `/api/users/${id}`, id})
+}
+
+httpClient.getMe = function(){
+	return this({ method: 'get', url: `/api/users/me`})
+}
+
+httpClient.updateUser = function(id, fields){
+	return this({ method: 'patch', url:`/api/users/${id}`, data: fields})
+}
+
+httpClient.deleteUser = function(id){
+    return this({ method: 'delete', url: `/api/users/${id}`})
+}
+
+
+httpClient.addMentor = function(mentorId){
+	return this({ method: 'post', url:`/api/users/${mentorId}`}) //To add mentor
+}
+
 // During initial app load attempt to set a localStorage stored token
 // as a default header for all api requests.
 httpClient.defaults.headers.common.token = httpClient.getToken()
