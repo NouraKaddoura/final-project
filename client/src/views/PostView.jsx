@@ -44,12 +44,12 @@ httpClient.updatePost(this.props.match.params.id, postFormFields)
   })
 }
 
-handleDeleteClick(){
+handleDeleteClick(){ 
     httpClient.deletePost(this.props.match.params.id).then((serverResponse)=>{
         this.props.history.push('/posts')
     })
 }
-componentDidMount(){ //why do I get the array of posts but the .data.title is undefined? I cannot map through it. Same with mentors.(populate?)
+componentDidMount(){ 
     httpClient.getPost(this.props.match.params.id).then((serverResponse)=>{
         this.setState({
             post: serverResponse.data
