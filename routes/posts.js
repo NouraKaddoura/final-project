@@ -22,9 +22,9 @@ postsRouter.post('/', (req, res) => {
 })
 
 postsRouter.get('/:id', (req, res) => {
-    Post.findById(req.params.id, (err, thatPost)=>{
+    Post.findById(req.params.id).populate('user').exec((err, thatUser) => {
         if(err) return console.log(err)
-        res.json(thatPost)
+        res.json(thatUser)
     })
 })
 

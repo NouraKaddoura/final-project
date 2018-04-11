@@ -31,7 +31,7 @@ class Posts extends React.Component {
                             return( 
                                 <Col sm="4" key={p._id}>
                                 <Card style={{backgroundColor:'#4CAF50', color: 'white', padding: '10px'}} key={p._id} body outline color="info">
-                                        <CardTitle style={{height: '24px', overflow: 'scroll'}}>Title: {p.title}</CardTitle>
+                                        <CardTitle style={{height: '24px', overflow: 'scroll'}}>Topic: {p.title}</CardTitle>
                                         <CardText style={{backgroundColor:'white', padding: '15px', color:'black', height: '80px'}}>{p.body.substring(50,0)}...</CardText>
                                             <Button style={{backgroundColor:'#90ee90', border:'none'}}><Link to={`/posts/${p._id}`} style={{color:'white'}} >View post By: {p.user.name}</Link></Button>
                                     </Card> 

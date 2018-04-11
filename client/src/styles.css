@@ -19,7 +19,7 @@
     box-shadow: 0 0 80px black;
     min-height: 400px;
 }
-/* .profilePage {
+.profilePage {
     margin-top: 0;
     margin-bottom: 1rem;
     background: linear-gradient( rgba(176,244,230, .8),rgba(46,139,87, 1));
@@ -29,9 +29,10 @@
     -webkit-box-shadow: 0 0 80px black;
     box-shadow: 0 0 80px black;
     min-height: 400px;
-    text-align: center;
+    max-height: 600px;
+    
 
-} */
+}
 
 .NavBar a, .NavBar button {
 	margin: 0 5px;
@@ -136,4 +137,12 @@
     margin-right: 0px;
     margin-left: 0px;
     padding: 10px;
+}
+
+.profile {
+    color: black;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+    font-size: 35px;
 }

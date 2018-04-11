@@ -83,7 +83,7 @@ class App extends React.Component {
 
 					<Route path="/profile" render={(props) => {
 						return currentUser
-							? <UserProfile {...props}/>
+							? <UserProfile onDeleteAccount={this.logOut.bind(this)}{...props}/>
 							: <Redirect to="/login" />
 					}} />
 

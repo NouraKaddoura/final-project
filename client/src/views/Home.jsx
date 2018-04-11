@@ -49,7 +49,6 @@ handleHideModalClick(){
 						: (
 							<span>
 								<div>
-								{/* <Button style={homeButtons}> <Link style={{color: 'inherit'}} to="/login" >Log In</Link> </Button> */}
 								<Button size='lg' onClick={this.handleSignUpClick.bind(this)} style={homeButtons}> Sign Up </Button>
 								</div>
 								

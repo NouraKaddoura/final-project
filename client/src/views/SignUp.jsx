@@ -5,7 +5,7 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 // sign up form behaves almost identically to log in form. We could create a flexible Form component to use for both actions, but for now we'll separate the two:
 class SignUp extends React.Component {
 	state = {
-		fields: { name: '', email: '', password: '', isMentor: false}
+		fields: { name: '', email: '', picture: '', password: '', isMentor: false}
 	}
 
 	onInputChange(evt) {
@@ -23,7 +23,7 @@ class SignUp extends React.Component {
 		console.log(this.state.fields)
 		evt.preventDefault()
 		httpClient.signUp(this.state.fields).then(user => {
-			this.setState({ fields: { name: '', email: '', password: '', isMentor: false } })
+			this.setState({ fields: { name: '', email: '', picture: '', password: '', isMentor: false } })
 			if(user) {
 				this.props.onSignUpSuccess(user)
 				// this.props.history.push('/')
@@ -34,7 +34,7 @@ class SignUp extends React.Component {
 	}
 
 	render() {
-		const { name, email, password } = this.state.fields
+		const { name, email, password, picture } = this.state.fields
 	
 		return (
 			<div style={{margin: 'auto'}} className='SignUp'>
@@ -49,6 +49,10 @@ class SignUp extends React.Component {
 						<FormGroup>
 						<Label for="email">Email</Label>
 							<Input type="text" placeholder="Email" name="email" value={email} />
+						</FormGroup>
+						<FormGroup>
+						<Label for="picture"> Profile Picture</Label>
+							<Input type="text" placeholder="Picture URL" name="picture" value={picture} />
 						</FormGroup>
 						<FormGroup>
 						<Label for="password">Password</Label>

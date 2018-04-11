@@ -9,7 +9,8 @@ class PostView extends React.Component {
     state = {
         post: '',
         modalOpen: false,
-        currentUser: httpClient.getCurrentUser()
+        currentUser: httpClient.getCurrentUser(),
+       
     }
 
 
@@ -58,7 +59,7 @@ componentDidMount(){
     })
 }
 render(){
-    const { post, modalOpen, currentUser } = this.state
+    const { post, modalOpen, currentUser} = this.state
     if(!post) return <h2>Loading...</h2>
     // console.log(post)
     // console.log(post.user)
@@ -66,7 +67,7 @@ render(){
     return(
             <div className="PostView">
             <div className="PostDetails">
-        {post.user === currentUser._id
+        {post.user._id === currentUser._id
 
                 ? (
 					<span>
@@ -80,7 +81,7 @@ render(){
 				)
 			}    
         <h1>{post.title}</h1>
-                <small>By: username</small>
+                <small>By: <Link to={'/users/' + post.user._id}>{post.user.name}</Link></small>
                 <div>{post.body}</div>
                 <Link to="/posts">Back To Latest Posts</Link>
                 <CommentBox updateComments={this.updateComments.bind(this)} postId={this.props.match.params.id} comments={post.comments} />

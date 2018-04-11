@@ -26,7 +26,7 @@ this.props.history.push("/posts")
     render(){
         const { title, body} = this.state.fields
         return(
-            <div style={{backgroundColor:'rgb(102, 193, 113)'}}className="NewPost">
+            <div style={{backgroundColor:'rgb(0,128,128)'}}className="NewPost">
             
             <h1 style={{color: 'white', margin: '10px'}} className="addPost">Add a Post</h1>
             <Form onChange={this.handleFormChange.bind(this)} onSubmit={this.handleFormSubmit.bind(this)}>
