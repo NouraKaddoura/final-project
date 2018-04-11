@@ -45,7 +45,8 @@ handleUpdateClick(evt){
 		console.log(serverResponse.data)
 		this.setState({
 			modalOpen: false,
-			user: serverResponse.data.user
+			user: serverResponse.data
+			
 		})
 	})
 }
@@ -108,7 +109,7 @@ handleDeleteClick(){
 
 			<h4 style={{backgroundColor:'rgb(0,128,128)', color: 'white', padding: '10px', marginTop: '10px'}}> Your Mentees: </h4>
 			{user.mentees.map((u)=>{
-			return <Link className="profile" to={'/users/' + u._id}>{u.name} , </Link>
+			return <Link className="profile" to={'/users/' + u._id}>{u.name} | </Link>
 		})}
 
 	<h4 style={{backgroundColor:'rgb(0,128,128)', color: 'white', padding: '10px'}}> Your Posts: </h4>
@@ -124,12 +125,12 @@ handleDeleteClick(){
 
 		<h4 style={{backgroundColor:'rgb(0,128,128)', color: 'white', padding: '10px', marginTop: '10px'}}> Your Mentors: </h4>
 		{user.mentors.map((u)=>{
-			return <Link key={u._id} className="profile" to={'/users/' + u._id}>{u.name} , </Link>
+			return <Link key={u._id} className="profile" to={'/users/' + u._id}>{u.name}  | </Link>
 		})}
 		
 		<h4 style={{backgroundColor:'rgb(0,128,128)', color: 'white', padding: '10px'}}> Your Posts: </h4>
 		{this.state.user.posts.map((p)=>{
-			return <Link key={p._id} className="profile" to={'/posts/' + p._id}>{p.title}</Link>
+			return <Link key={p._id} className="profile" to={'/posts/' + p._id}>{p.title} | </Link>
 		})}
 
 	

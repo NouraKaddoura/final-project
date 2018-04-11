@@ -33,7 +33,8 @@ postsRouter.get('/:id/edit', (req, res) => {
 })
 
 postsRouter.patch('/:id', (req, res) => {
-    Post.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedPost) => {
+    Post.findByIdAndUpdate(req.params.id, req.body, {new: true}).populate('user')
+    .exec((err, updatedPost) => {
         if(err) return console.log(err)
         res.json(updatedPost)
     } )
@@ -47,7 +48,8 @@ postsRouter.delete('/:id', (req, res)=>{
 })
 
 postsRouter.post('/:id/comments', (req, res) =>{
-    Post.findById(req.params.id, (err, thatPost)=>{
+    Post.findById(req.params.id).populate('user')
+    .exec((err, thatPost)=>{
         console.log(req.user.name)
         req.body.user = req.user.name
         console.log("this is the body", req.body)

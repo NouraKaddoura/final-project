@@ -29,6 +29,7 @@ class App extends React.Component {
 		httpClient.logOut()
 		this.setState({ currentUser: null })
 	}
+
 	
 	render() {
 		const { currentUser } = this.state

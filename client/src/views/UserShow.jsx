@@ -44,7 +44,13 @@ class UserShow extends React.Component {
                 {user.isMentor
                     ? (
                         <span>
-                        <Button onClick={this.onClickAddMentor.bind(this)}>Add Mentor</Button>
+                        {this.state.currentUser.mentors.some((m)=>{
+                            return m === this.props.match.params.id
+                          }) ? <p>Mentor Already Added</p>
+                          :
+                          <Button onClick={this.onClickAddMentor.bind(this)}>Add Mentor</Button>
+                        }
+                        
                         
                         </span>
                     )

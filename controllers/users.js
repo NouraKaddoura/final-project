@@ -31,12 +31,16 @@ module.exports = {
 
 	// update an existing user
 	update: (req, res) => {
-		User.findById(req.params.id, (err, user) => {
-			Object.assign(user, req.body)
-			user.save((err, updatedUser) => {
-				res.json({success: true, message: "User updated.", user})
+		User.findById(req.params.id)
+			.populate('mentors')
+			.populate('mentees')
+			.exec((err, user) => {
+				Object.assign(user, req.body)
+				user.save()
+				Post.find({ user }, (err, posts) => {
+					res.json({...user.toObject(), posts})
+				})
 			})
-		})
 	},
 
 	// delete an existing user
