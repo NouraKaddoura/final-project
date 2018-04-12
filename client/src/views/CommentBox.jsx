@@ -30,7 +30,7 @@ class CommentList extends React.Component{
     render(){
        
         return(
-            <div style={{maxHeight: '300px', overflow:'scroll'}} className="commentList">
+            <div style={{maxHeight: '90px', overflow:'scroll'}} className="commentList">
           
             <Comment comments={this.props.comments} />
             </div>
@@ -39,17 +39,24 @@ class CommentList extends React.Component{
 }
 class CommentForm extends React.Component{
 
+state = {
+    body: ''
+}
+
 onFormSubmit(evt){
     evt.preventDefault()
     console.log('clicked')
     const data = {
         body: evt.target[0].value
     }
+    
     httpClient.addComment(this.props.postId, data).then((serverResponse)=>{
         console.log(serverResponse)
         this.props.updateComments(serverResponse.data)
+
     })
-  
+    
+ 
 }
 
 
@@ -73,7 +80,7 @@ class CommentBox extends React.Component {
         console.log(this.props)
         return(
             <div className="commentBox">
-           <h3>Comments:</h3>
+           <h4>Comments:</h4>
            <CommentList comments={this.props.comments}/>
            <CommentForm updateComments={this.props.updateComments} postId={this.props.postId} comments={this.props.comments}/>
             </div>

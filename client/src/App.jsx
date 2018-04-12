@@ -36,9 +36,10 @@ class App extends React.Component {
 		console.log(this.props)
 		return (
 			<div className='body'>
+			<NavBar currentUser={currentUser} />
 			<div className='App container'>
 
-				<NavBar currentUser={currentUser} />
+				
 
 				<Switch>
 
@@ -93,10 +94,11 @@ class App extends React.Component {
 					}}  />
 
 				</Switch>
-				<Footer />
+				
+			</div>
+			<Footer />
 			</div>
 			
-			</div>
 		)
 	}
 }

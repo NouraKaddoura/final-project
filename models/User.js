@@ -30,5 +30,10 @@ userSchema.pre('save', function(next) {
 	next()
 })
 
+userSchema.pre('save', function(next) {
+    if(!this.picture) this.picture = "http://www.oidhreachtlca.ie/images/user.png"
+    next()
+})
+
 const User = mongoose.model('User', userSchema)
 module.exports = User

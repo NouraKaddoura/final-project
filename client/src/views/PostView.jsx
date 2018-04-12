@@ -80,9 +80,9 @@ render(){
 					</span>				
 				)
 			}    
-        <h1>{post.title}</h1>
+        <h2>{post.title}</h2>
                 <small>By: <Link to={'/users/' + post.user._id}>{post.user.name}</Link></small>
-                <div>{post.body}</div>
+                <div style={{overflow: 'scroll', height: '210px'}}>{post.body}</div>
                 <Link to="/posts">Back To Latest Posts</Link>
                 <CommentBox updateComments={this.updateComments.bind(this)} postId={this.props.match.params.id} comments={post.comments} />
             </div>
