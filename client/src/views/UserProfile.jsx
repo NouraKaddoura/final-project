@@ -66,7 +66,7 @@ handleDeleteClick(){
 		return (
 			<div className="profilePage">	
 			<h1 style={{color:'rgba(0,0,0,.8)', margin: '10px'}}>Welcome Back, {user.name}</h1>
-			<div style={{paddingLeft: '104px'}}className="profilepic"><img style={{width: '250px'}}src={user.picture} alt="userpicture"/></div>
+			<div style={{paddingLeft: '104px'}}className="profilepic"><img style={{width: '200px'}}src={user.picture} alt="userpicture"/></div>
 			
 			
 
@@ -107,12 +107,14 @@ handleDeleteClick(){
 		<span>
 			<Button style={{align:'right', marginLeft: '490px'}} onClick={this.handleEditClick.bind(this)}>Edit Profile</Button>		
 
-			<h4 style={{backgroundColor:'rgb(0,128,128)', color: 'white', padding: '10px', marginTop: '10px'}}> Your Mentees: </h4>
+			<h5 style={{backgroundColor:'rgb(0,128,128)', color: 'white', padding: '5px', marginTop: '10px'}}> Your Mentees: </h5>
+		
 			{user.mentees.map((u)=>{
 			return <Link className="profile" to={'/users/' + u._id}>{u.name} | </Link>
 		})}
+			
 
-	<h4 style={{backgroundColor:'rgb(0,128,128)', color: 'white', padding: '10px'}}> Your Posts: </h4>
+	<h5 style={{backgroundColor:'rgb(0,128,128)', color: 'white', padding: '5px'}}> Your Posts: </h5>
 		{this.state.user.posts.map((p)=>{
 			return <Link className="profile" to={ '/posts/' + p._id}>{p.title}</Link>
 		})}
@@ -123,15 +125,20 @@ handleDeleteClick(){
 		<span>
 			<Button style={{align:'right', marginLeft: '490px'}} onClick={this.handleEditClick.bind(this)}>Edit Profile</Button>		
 
-		<h4 style={{backgroundColor:'rgb(0,128,128)', color: 'white', padding: '10px', marginTop: '10px'}}> Your Mentors: </h4>
+		<h5 style={{backgroundColor:'rgb(0,128,128)', color: 'white', padding: '5px', marginTop: '10px'}}> Your Mentors: </h5>
+		
 		{user.mentors.map((u)=>{
 			return <Link key={u._id} className="profile" to={'/users/' + u._id}>{u.name}  | </Link>
 		})}
 		
-		<h4 style={{backgroundColor:'rgb(0,128,128)', color: 'white', padding: '10px'}}> Your Posts: </h4>
+		
+		<h5 style={{backgroundColor:'rgb(0,128,128)', color: 'white', padding: '5px'}}> Your Posts: </h5>
+		
+		<div style={{ height: '200px', overflow:'scroll'}}>
 		{this.state.user.posts.map((p)=>{
 			return <Link key={p._id} className="profile" to={'/posts/' + p._id}>{p.title} | </Link>
 		})}
+		</div>
 
 	
 		</span>

@@ -32,7 +32,7 @@ export default class Example extends React.Component {
 			  <NavItem>
                 <NavLink href="/posts">Posts</NavLink>
               </NavItem>
-			  {this.state.currentUser
+			  {this.props.currentUser
 			  ? (
 					<span>
 						<NavItem> 

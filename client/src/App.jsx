@@ -90,7 +90,7 @@ class App extends React.Component {
 					}} />
 
 					<Route path="/" render={(props)=>{
-						return <Home {...props} onLoginSuccess={this.onLoginSuccess.bind(this)} />
+						return <Home currentUser={currentUser}{...props} onLoginSuccess={this.onLoginSuccess.bind(this)} />
 					}}  />
 
 				</Switch>

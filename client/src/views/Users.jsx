@@ -4,24 +4,50 @@ import { Link } from 'react-router-dom'
 import _ from 'lodash'
 import { Row, Col } from 'reactstrap';
 
+
 class Users extends React.Component {
 	state = { currentUser: httpClient.getCurrentUser(),
-	users:[] }
+	users:[],
+	meetups:[] }
 
 	componentDidMount() {
         httpClient.getAllUsers().then((serverResponse)=> {
             this.setState({
                 users: serverResponse.data
             })
-        })
+		})
+		httpClient.getMeetup().then((serverResponse)=>{
+		console.log(serverResponse.data)
+			this.setState({
+				meetups: serverResponse.data
+			})
+		})
     }
 
 	render() {
 		const userRows = _.chunk(this.state.users, 3)
-		const { users } = this.state
+		const { users, meetups } = this.state
 		return (
+			
+			<div style={{height: '500px', overflow: 'scroll'}} className="usersProfile">
+
+				<div style={{float: 'right', backgroundColor:'white', width:'500px', textAlign:'center', paddingRight:'20px'}}className="localMeetups">
+
+						<h2>Local MeetUps:</h2>
+							{meetups.map((m)=>{
+								return <ul style={{listStyle: 'none'}}>
+										 <li><Link style={{color:'teal'}} to={m.link}>{m.name}</Link></li> <img style={{width:'250px', height: '150px'}} src={m.key_photo.photo_link}/>
+										 	<ul style={{listStyle:'none'}}>
+												 <li>Organized by: {m.organizer.name}</li>
+												 
+											</ul> 	
+										</ul>
+										
+							})}
+				</div>
+
 			<div className="UsersIndexPage">	
-			<h2>Number of Users: {users.length}</h2>
+			<h2>MentorHub Users:</h2>
 			{userRows.map((row, index)=>{
                 return(
                     <Row key={index}>
@@ -38,6 +64,8 @@ class Users extends React.Component {
         })}
 			
 				</div>
+				</div>
+			
 			)
 		}
 	}

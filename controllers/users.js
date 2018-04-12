@@ -73,7 +73,7 @@ module.exports = {
 				user.save((err)=> {
 					req.user.mentors.push(req.params.id)
 					req.user.save((err)=>{
-						res.json({ success: true, user})
+						res.json({ success: true, user: req.user})
 					})
 				})
 			} else {

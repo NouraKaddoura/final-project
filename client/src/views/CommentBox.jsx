@@ -47,13 +47,14 @@ onFormSubmit(evt){
     evt.preventDefault()
     console.log('clicked')
     const data = {
-        body: evt.target[0].value
+        // body: evt.target[0].value
+        body: this.refs.commentBody.refs.commentBody.value
     }
     
     httpClient.addComment(this.props.postId, data).then((serverResponse)=>{
         console.log(serverResponse)
         this.props.updateComments(serverResponse.data)
-
+        this.refs.commentBody.refs.commentBody.value = ''
     })
     
  
@@ -64,7 +65,7 @@ onFormSubmit(evt){
         return(
             <div className="commentForm">
                         <Form onSubmit={this.onFormSubmit.bind(this)}>
-							<Input type="text" placeholder="write a comment..." name="body" value={this.props.body} />
+							<Input type="text" ref="commentBody" innerRef="commentBody" placeholder="write a comment..." name="body" />
 							<Button style={{margin: '10px' }} type="submit">Comment</Button>
 						</Form>
         

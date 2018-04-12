@@ -109,6 +109,9 @@ httpClient.addMentor = function(mentorId){
 	return this({ method: 'post', url:`/api/users/${mentorId}`}) //To add mentor
 }
 
+httpClient.getMeetup = function(){
+	return this({ method: 'get', url: `/api/find/groups`})
+}
 // During initial app load attempt to set a localStorage stored token
 // as a default header for all api requests.
 httpClient.defaults.headers.common.token = httpClient.getToken()

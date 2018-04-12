@@ -42,10 +42,10 @@ handleHideModalClick(){
 				
 					
 					
-					{this.currentUser
+					{this.props.currentUser
 						? (
 							<span>
-								<h1>Welcome Back!</h1>	 
+								<h1></h1>	 
 							</span>
 						)
 						: (
@@ -75,7 +75,7 @@ handleHideModalClick(){
 					<div style={{maxWidth: '1100px'}} class="Dropdown">
 							<Button style={{backgroundColor: 'transparent'}} id="DropDown-Button">About MentorHub</Button>
 								<div class="Dropdown-Menu">
-									<p>
+									<p style={{margin: '20px'}}>
 									Mentoring is a professional activity, a trusted relationship, a meaningful commitment. The origins of mentoring can be traced back to ancient Greece as a technique to impart to young men important social, spiritual, and personal values. Mentoring as we know it today is loosely modeled on the historical craftsman/apprentice relationship, where young people learned a trade by shadowing the master artisan. In the mid-70s, corporate America redefined mentoring as a career development strategy. The concept of mentoring faculty and administrators is relatively new to higher education and rare in information technology circles, where staff professional development often takes the form of technical manuals and certifications. It is precisely this type of support organization, however, that needs a strong foundation of mentoring to build and retain a healthy workforce that can react quickly to change and can develop, adapt, and regenerate itself over time.
 									</p>
 								</div>

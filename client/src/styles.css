@@ -8,15 +8,19 @@
 }
 
 .Dropdown-Menu {
+   /* display: block; */
 	display: none;
 	background-color: #005959;
-	margin-top: 10px;
+    margin-top: 10px;
     position: relative;
     color: white;
+   
 }
 
 .Dropdown:hover .Dropdown-Menu{
-	display: block;
+    display: inline-block;
+  
+    
 }
 
 
@@ -28,6 +32,15 @@
     -webkit-border-radius: 8px;
        -moz-border-radius: 8px;
             border-radius: 8px;
+          
+           
+}
+
+#DropDown-Button{
+    background-color: transparent;
+    text-align: center;
+    margin-left: 475px;
+
 }
 
 .navbar { 
@@ -71,6 +84,10 @@
     box-shadow: 0 0 80px black;
     min-height: 400px;
 } */
+
+.NewPost {
+    height: 520px
+}
 .profilePage {
     margin-top: 0;
     margin-bottom: 1rem;
@@ -81,7 +98,7 @@
     -webkit-box-shadow: 0 0 80px black;
     box-shadow: 0 0 80px black;
     min-height: 400px;
-    max-height: 600px;
+    max-height: 520px;
     
 
 }
@@ -124,6 +141,7 @@
 	background-size: 120%;
     background-position: center;
     min-height: 800px;
+    font-family: 'Fira Sans', sans-serif;
  
 }
 /* .body{
@@ -209,5 +227,13 @@
     text-decoration: none;
     background-color: transparent;
     -webkit-text-decoration-skip: objects;
-    font-size: 35px;
+    font-size: 20px;
+    
 }
+
+@media only screen and (max-width: 480px){
+    #footer .column ul {display:none; margin-top: 10px;}
+    #footer h3 { cursor:pointer; margin: 10px 0 0;padding: 8px 20px;border: 1px solid #ddd;
+  border-radius: 4px;font-size: 18px;}
+    #footer .column { width:100%!important}
+  }
