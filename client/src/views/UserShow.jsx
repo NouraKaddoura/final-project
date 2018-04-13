@@ -2,6 +2,7 @@ import React from 'react'
 import httpClient from '../httpClient'
 // import { Link } from 'react-router-dom'
 import { Button } from 'reactstrap'
+import { Link } from 'react-router-dom'
 
 
 
@@ -50,11 +51,17 @@ class UserShow extends React.Component {
         console.log(currentUser)
         if(!user) return <h2>Loading...</h2>
 		return (
-			<div style={{backgroundColor:'white', height:'540px'}} className="UsersShowPage">	
+			<div style={{backgroundColor:'white', height:'480px', width:'550px', textAlign: 'center', margin: '0 auto'}} className="UsersShowPage">	
             <h1>{this.state.addedMessage}</h1>
-            <div style={{marginLeft: '50px'}} className="UsersShowBox" >
-              <img style={{width:'150px', marginTop:'50px'}} className="pic" src={user.picture}/>
-                <h2>User: {user.name}</h2>
+           
+            <div  className="UsersShowBox" >
+            <h2 style={{textAlign: 'center'}}>User: {user.name}</h2>
+              <img style={{width:'200px', marginBottom:'10px'}} className="pic" src={user.picture}/>
+        
+               
+         
+             
+                
             </div>      
                 {user.isMentor
                     ? (
@@ -63,17 +70,42 @@ class UserShow extends React.Component {
                           ? <Button style={{marginLeft:'50px'}} onClick={this.onClickDeleteMentor.bind(this)}>Remove Mentor</Button>
                           : <Button style={{marginLeft:'50px'}} onClick={this.onClickAddMentor.bind(this)}>Add Mentor</Button>
                         } */}
-                        <Button style={{marginLeft:'50px'}} onClick={this.onClickAddMentor.bind(this)}>Add Mentor</Button>
+                        <Button style={{  marginBottom: '20px'}} onClick={this.onClickAddMentor.bind(this)}>Add Mentor</Button>
                         
-                        
+                    <h4>Bio:</h4>
+                    {/* <div style={{ display: 'flex', marginLeft:'50px', order:'3', overflow: 'scroll'}}className="menteesList">       
+                    
+                    <h4>Posts:</h4>
+                        {user.posts.map((p)=>{
+                            return(
+                            <ul style={{ listStyleType: 'none'}}>
+                            <li><Link to="/">{p.title} </Link></li>
+                            </ul>
+                            )
+                         })}
+                
+                        </div> */}
+                   
+
                         </span>
                     )
                     : (
                         <span>
                         
                             {/* <Button onClick={this.onClickAddMentor.bind(this)}>Add Mentee</Button> */}
-                        <h4 style={{marginLeft:'50px'}}>Mentee Looking for Mentor</h4> 
-                        
+                        <h4 style={{ marginBottom: '20px'}}>Mentee Looking for Mentor</h4> 
+                        <h4>Bio:</h4>
+                        {/* <div style={{ display: 'flex', marginLeft:'50px', order:'3', overflow: 'scroll'}}className="menteesList">       
+                        <h4>Posts:</h4>
+                        {user.posts.map((p)=>{
+                            return(
+                            <ul style={{ listStyleType: 'none'}}>
+                            <li><Link to="/">{p.title} </Link></li>
+                            </ul>
+                            )
+                         })}
+                
+                        </div> */}
                         </span>
                         
                     )

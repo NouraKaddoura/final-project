@@ -10,12 +10,25 @@ module.exports = {
 		})
 	},
 
+			// User.findById(req.user._id)
+			// 	.populate('mentors')
+			// 	.populate('mentees')
+			// 	.exec((err, user) => {
+			// 		Post.find({ user }, (err, posts) => {
+			// 			res.json({...user.toObject(), posts})
+			// 	})
+			// })	
 	// get one user
 	show: (req, res) => {
-		console.log("Current User:")
-		console.log(req.user)
-		User.findById(req.params.id, (err, user) => {
-			res.json(user)
+		// console.log("Current User:")
+		// console.log(req.user)
+		User.findById(req.params.id) 
+		.populate('mentors')
+		.populate('mentees')
+		.exec((err, user) => {
+			Post.find({ user }, (err, posts) => {
+				res.json({...user.toObject(), posts})
+			})
 		})
 	},
 
