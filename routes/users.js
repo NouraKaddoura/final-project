@@ -21,6 +21,7 @@ usersRouter.route('/:id')
 	.get(usersCtrl.show)
 	.patch(usersCtrl.update)
 	.post(usersCtrl.addMentor)  //is this where I add the mentor?
+	.delete(usersCtrl.deleteMentor)
 	.delete(usersCtrl.destroy)
 
 module.exports = usersRouter

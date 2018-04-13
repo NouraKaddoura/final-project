@@ -109,6 +109,10 @@ httpClient.addMentor = function(mentorId){
 	return this({ method: 'post', url:`/api/users/${mentorId}`}) //To add mentor
 }
 
+httpClient.deleteMentor = function(mentorId){
+	return this({method:'delete', url:`/api/users/${mentorId}`}) //To delete mentor
+}
+
 httpClient.getMeetup = function(){
 	return this({ method: 'get', url: `/api/find/groups`})
 }

@@ -5,7 +5,8 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 // sign up form behaves almost identically to log in form. We could create a flexible Form component to use for both actions, but for now we'll separate the two:
 class SignUp extends React.Component {
 	state = {
-		fields: { name: '', email: '', picture: '', password: '', isMentor: false}
+		fields: { name: '', email: '', picture: '', password: '', isMentor: false},
+		errorMessage: null
 	}
 
 	onInputChange(evt) {
@@ -27,6 +28,10 @@ class SignUp extends React.Component {
 			if(user) {
 				this.props.onSignUpSuccess(user)
 				// this.props.history.push('/')
+			} else {
+				this.setState({
+					errorMessage: 'Invalid Credentials: Unable to Create Account. Please Try Again.'
+				})
 			}
 			
 		})
@@ -38,6 +43,8 @@ class SignUp extends React.Component {
 	
 		return (
 			<div style={{margin: 'auto'}} className='SignUp'>
+				<h4 style={{ margin: '10px', backgroundColor:'rgba(255, 0, 0, 0.7)', color:'white'}}>{this.state.errorMessage}</h4>
+
 				<div className='row'>
 					<div className='column column-33 column-offset-33'>
 						<h1>Sign Up</h1>

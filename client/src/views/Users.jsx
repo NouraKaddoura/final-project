@@ -25,6 +25,7 @@ class Users extends React.Component {
     }
 
 	render() {
+		
 		const userRows = _.chunk(this.state.users, 3)
 		const { users, meetups } = this.state
 		return (

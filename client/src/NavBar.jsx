@@ -29,7 +29,7 @@ export default class Example extends React.Component {
               <NavItem>
                 <NavLink href="/">Home</NavLink>
               </NavItem>
-			  <NavItem>
+			      <NavItem>
                 <NavLink href="/posts">Posts</NavLink>
               </NavItem>
 			  {this.props.currentUser

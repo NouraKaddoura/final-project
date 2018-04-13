@@ -67,11 +67,29 @@ module.exports = {
 
 	addMentor: (req, res) =>{
 		User.findById(req.params.id, (err, user) =>{
-			if(!user.mentees.includes(req.user._id)) {
-				user.mentees.push(req.user._id)
+			if(!user.mentees.includes(req.user.id)) {
+				user.mentees.push(req.user.id)
 				console.log(req.params.id, req.user._id)
 				user.save((err)=> {
 					req.user.mentors.push(req.params.id)
+					req.user.save((err, updatedUser)=>{
+						res.json({ success: true, mentor: user, user: updatedUser})
+					})
+				})
+			} else {
+				res.json({ success: false, user})
+			}
+		})
+	},
+
+	deleteMentor:(req, res) => {
+		User.findById(req.params.id, (err, user)=>{
+			if(!user.mentees.includes(req.user.id)){
+				const menteeIndex = user.mentees.findIndex((m) => req.user.id)
+				user.mentees.splice(menteeIndex, 1)
+				user.save((err)=>{
+					const mentorIndex = req.user.mentors.findIndex((m) => req.params.id)
+					req.user.mentors.splice(mentorIndex, 1)
 					req.user.save((err)=>{
 						res.json({ success: true, user: req.user})
 					})
@@ -80,7 +98,18 @@ module.exports = {
 				res.json({ success: false, user})
 			}
 		})
+		
+		
+		// User.findById(req.params.id)
+		// 	.populate('mentors')
+		// 	.populate('mentees')
+		// 	.exec((err, user) => {
+		// if(!user.mentees.includes(req.user._id))
+		// user.findById(req.params._id).splice()
+			
+		// })	
 	},
+
 	me: (req, res) => {
 		User.findById(req.user._id)
 			.populate('mentors')

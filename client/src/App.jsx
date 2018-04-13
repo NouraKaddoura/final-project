@@ -17,7 +17,21 @@ import Autosuggest from 'react-autosuggest';
 
 
 class App extends React.Component {
-	state = { currentUser: httpClient.getCurrentUser() }
+	state = { loadingCurrentUser: true, currentUser: null }
+
+	loadCurrentUser() {
+		httpClient.getMe().then((serverResponse) => {
+			const { _id } = serverResponse.data
+			this.setState({
+				currentUser: _id ? serverResponse.data : null,
+				loadingCurrentUser: false
+			})
+		})
+	}
+
+	componentDidMount() {
+		this.loadCurrentUser()
+	}
 
 	onLoginSuccess(user) {
 		this.setState({ currentUser: httpClient.getCurrentUser() }, () => {
@@ -32,8 +46,9 @@ class App extends React.Component {
 
 	
 	render() {
-		const { currentUser } = this.state
+		const { currentUser, loadingCurrentUser } = this.state
 		console.log(this.props)
+		if(loadingCurrentUser) return <h1>Loading...</h1>
 		return (
 			<div className='body'>
 			<NavBar currentUser={currentUser} />
@@ -73,7 +88,7 @@ class App extends React.Component {
 					
 					<Route path="/users/:id" render={(routeProps)=>{
 						return currentUser
-						? <UserShow {...routeProps}/>
+						? <UserShow onAddMentorSuccess={this.loadCurrentUser.bind(this)} currentUser={currentUser} {...routeProps}/>
 						: <Redirect to="/login" />
 					}} />
 

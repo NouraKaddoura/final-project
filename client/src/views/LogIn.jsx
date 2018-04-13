@@ -2,9 +2,11 @@ import React from 'react'
 import httpClient from '../httpClient'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
+
 class LogIn extends React.Component {
 	state = {
-		fields: { email: '', password: ''}
+		fields: { email: '', password: ''},
+		errorMessage: null
 	}
 
 	onInputChange(evt) {
@@ -23,14 +25,25 @@ class LogIn extends React.Component {
 			if(user) {
 				this.props.onLoginSuccess(user)
 				// this.props.history.push('/')
+			} else {
+				this.setState({
+					errorMessage: ' Invalid credentials, try again'
+				})
+				// setTimeout(() => { this.setState({ errorMessage: 'Invalid, try again'})}, 3000);
+			
 			}
+
 		})
 	}
+
 	
 	render() {
 		const { email, password } = this.state.fields
 		return (
 			<div className='LogIn'>
+				<h4 style={{ margin: '10px', backgroundColor:'rgba(255, 0, 0, 0.7)', color:'white'}}>{this.state.errorMessage}</h4>
+		
+
 				<div  className='row'>
 					<div className='column column-33 column-offset-33'>
 						<h1>Log In</h1>

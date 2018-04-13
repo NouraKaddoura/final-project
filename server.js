@@ -37,9 +37,6 @@ app.get('/api/find/groups/', verifyToken, (req, res)=>{
 	httpClient(options).then((apiResponse)=>{
 		res.json(apiResponse.data)
 	})
-	.catch(error => {
-		console.log(error)
-	})
 })
 
 app.use('/api/users', usersRoutes)

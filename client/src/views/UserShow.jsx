@@ -7,7 +7,6 @@ import { Button } from 'reactstrap'
 
 class UserShow extends React.Component {
 	state = {
-        currentUser: httpClient.getCurrentUser(),
         user: null
     }
 
@@ -26,30 +25,45 @@ class UserShow extends React.Component {
         evt.preventDefault()
         const mentorId = this.props.match.params.id
         httpClient.addMentor(mentorId).then((serverResponse)=>{
+            console.log(serverResponse.data)
             this.setState({
-                currentUser: serverResponse.data.user
+                user: serverResponse.data.mentor
             })
+
+            this.props.onAddMentorSuccess()
+        })
+    }
+
+    onClickDeleteMentor(evt){
+        evt.preventDefault()
+        const mentorId = this.props.match.params.id
+        // console.log('clicked')
+        // console.log(mentorId)
+        httpClient.deleteMentor(mentorId).then((serverResponse)=>{
+            console.log(serverResponse)
         })
     }
 
 	render() {
-        const { user } = this.state
-   
-        console.log(user)
+        const { match: { params: { id } }, currentUser } = this.props
+        const { user } = this.state   
+        console.log(currentUser)
         if(!user) return <h2>Loading...</h2>
 		return (
-			<div className="UsersShowPage">	
+			<div style={{backgroundColor:'white', height:'540px'}} className="UsersShowPage">	
+            <h1>{this.state.addedMessage}</h1>
+            <div style={{marginLeft: '50px'}} className="UsersShowBox" >
+              <img style={{width:'150px', marginTop:'50px'}} className="pic" src={user.picture}/>
                 <h2>User: {user.name}</h2>
-                    
+            </div>      
                 {user.isMentor
                     ? (
                         <span>
-                        {this.state.currentUser.mentors.some((m)=>{
-                            return m === this.props.match.params.id
-                          }) ? <p>Mentor Already Added</p>
-                          :
-                          <Button onClick={this.onClickAddMentor.bind(this)}>Add Mentor</Button>
-                        }
+                        {/* {this.props.currentUser.mentors.includes(id)
+                          ? <Button style={{marginLeft:'50px'}} onClick={this.onClickDeleteMentor.bind(this)}>Remove Mentor</Button>
+                          : <Button style={{marginLeft:'50px'}} onClick={this.onClickAddMentor.bind(this)}>Add Mentor</Button>
+                        } */}
+                        <Button style={{marginLeft:'50px'}} onClick={this.onClickAddMentor.bind(this)}>Add Mentor</Button>
                         
                         
                         </span>
@@ -58,7 +72,7 @@ class UserShow extends React.Component {
                         <span>
                         
                             {/* <Button onClick={this.onClickAddMentor.bind(this)}>Add Mentee</Button> */}
-                        <h1>Mentee Looking for Mentor</h1> 
+                        <h4 style={{marginLeft:'50px'}}>Mentee Looking for Mentor</h4> 
                         
                         </span>
                         
