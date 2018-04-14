@@ -74,24 +74,13 @@ class UserShow extends React.Component {
                     ? (
                         <span>
                         {user.mentees.includes(currentUser._id)
-                          ? <Button style={{marginLeft:'50px'}} onClick={this.onClickDeleteMentor.bind(this)}>Remove Mentor</Button>
-                          : <Button style={{marginLeft:'50px'}} onClick={this.onClickAddMentor.bind(this)}>Add Mentor</Button>
+                          ? <Button onClick={this.onClickDeleteMentor.bind(this)}>Remove Mentor</Button>
+                          : <Button onClick={this.onClickAddMentor.bind(this)}>Add Mentor</Button>
                         }
                         {/* <Button style={{  marginBottom: '20px'}} onClick={this.onClickAddMentor.bind(this)}>Add Mentor</Button> */}
                         
-                    <h4>Bio:</h4>
-                    {/* <div style={{ display: 'flex', marginLeft:'50px', order:'3', overflow: 'scroll'}}className="menteesList">       
-                    
-                    <h4>Posts:</h4>
-                        {user.posts.map((p)=>{
-                            return(
-                            <ul style={{ listStyleType: 'none'}}>
-                            <li><Link to="/">{p.title} </Link></li>
-                            </ul>
-                            )
-                         })}
-                
-                        </div> */}
+                        <h4>Bio:</h4>
+               
                    
 
                         </span>
@@ -102,17 +91,7 @@ class UserShow extends React.Component {
                             {/* <Button onClick={this.onClickAddMentor.bind(this)}>Add Mentee</Button> */}
                         <h4 style={{ marginBottom: '20px'}}>Mentee Looking for Mentor</h4> 
                         <h4>Bio:</h4>
-                        {/* <div style={{ display: 'flex', marginLeft:'50px', order:'3', overflow: 'scroll'}}className="menteesList">       
-                        <h4>Posts:</h4>
-                        {user.posts.map((p)=>{
-                            return(
-                            <ul style={{ listStyleType: 'none'}}>
-                            <li><Link to="/">{p.title} </Link></li>
-                            </ul>
-                            )
-                         })}
-                
-                        </div> */}
+                  
                         </span>
                         
                     )
