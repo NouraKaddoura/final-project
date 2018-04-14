@@ -45,7 +45,7 @@ this.props.history.push("/posts")
             </FormGroup>
             <FormGroup check row>
             <Col sm={{ size: 10, offset: 9 }}>
-               <Button style={{margin: '12px', backgroundColor:'#4CAF50'}}>Submit</Button>
+               <Button style={{ backgroundColor:'white', color: 'black'}}>Submit</Button>
             </Col>
             </FormGroup>
            

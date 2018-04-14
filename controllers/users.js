@@ -24,11 +24,12 @@ module.exports = {
 		// console.log(req.user)
 		User.findById(req.params.id) 
 		.populate('mentors')
-		.populate('mentees')
+		// .populate('mentees')
 		.exec((err, user) => {
-			Post.find({ user }, (err, posts) => {
-				res.json({...user.toObject(), posts})
-			})
+			res.json(user)
+			// Post.find({ user }, (err, posts) => {
+			// 	res.json({...user.toObject(), posts})
+			// })
 		})
 	},
 
@@ -103,8 +104,8 @@ module.exports = {
 				user.save((err)=>{
 					const mentorIndex = req.user.mentors.findIndex((m) => req.params.id)
 					req.user.mentors.splice(mentorIndex, 1)
-					req.user.save((err)=>{
-						res.json({ success: true, user: req.user})
+					req.user.save((err, updatedUser)=>{
+						res.json({ success: true, mentor: user, user: updatedUser})
 					})
 				})
 			} else {

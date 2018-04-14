@@ -21,8 +21,8 @@ class Posts extends React.Component {
        
         return (
             <div>
-  <div className="box" style={{float: 'right', backgroundColor: 'white'}}>
-           <h1>Hello World</h1>
+  <div className="box" style={{float: 'right'}}>
+           <h1>Total : {posts.length}</h1>
            </div>
 
 
@@ -39,8 +39,8 @@ class Posts extends React.Component {
                                 <Col md="12" key={p._id}>
                                 <Card style={{backgroundColor:'#005959', color: 'white', padding: '10px'}} key={p._id} body outline color="info">
                                         <CardTitle style={{height: '24px', overflow: 'scroll'}}>Topic: {p.title}</CardTitle>
-                                        <CardText style={{backgroundColor:'white', padding: '15px', color:'black', height: '80px'}}>{p.body.substring(150,0)}...</CardText>
-                                            <Button style={{backgroundColor:'#e5c9aa', border:'none'}}><Link to={`/posts/${p._id}`} style={{color:'black'}} >View post By: {p.user.name}</Link></Button>
+                                        <CardText style={{backgroundColor:'rgb(229, 248, 255)', padding: '15px', color:'black', height: '80px'}}>{p.body.substring(150,0)}...</CardText>
+                                            <Button style={{backgroundColor:'rgb(74, 145, 168)', border:'none'}}><Link to={`/posts/${p._id}`} style={{color:'black'}} >View post By: {p.user.name}</Link></Button>
                                     </Card> 
                                 </Col> 
                 )

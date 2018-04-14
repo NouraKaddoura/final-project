@@ -20,6 +20,7 @@ class App extends React.Component {
 	state = { loadingCurrentUser: true, currentUser: null }
 
 	loadCurrentUser() {
+		console.log("trying to get current user")
 		httpClient.getMe().then((serverResponse) => {
 			const { _id } = serverResponse.data
 			this.setState({
@@ -48,68 +49,70 @@ class App extends React.Component {
 	render() {
 		const { currentUser, loadingCurrentUser } = this.state
 		console.log(this.props)
-		if(loadingCurrentUser) return <h1>Loading...</h1>
 		return (
 			<div className='body'>
 			<NavBar currentUser={currentUser} />
 			<div className='App container'>
+				{loadingCurrentUser
+					? (
+						<h1>Loading...</h1>
+					)
+					: (
+						<Switch>
 
-				
+							<Route path="/login" render={(props) => {
+								return <LogIn {...props} onLoginSuccess={this.onLoginSuccess.bind(this)} />
+							}} />
 
-				<Switch>
+							<Route path="/logout" render={(props) => {
+								return <LogOut onLogOut={this.logOut.bind(this)} />
+							}} />
 
-					<Route path="/login" render={(props) => {
-						return <LogIn {...props} onLoginSuccess={this.onLoginSuccess.bind(this)} />
-					}} />
+							{/* the sign up component takes an 'onSignUpSuccess' prop which will perform the same thing as onLoginSuccess: set the state to contain the currentUser */}
+							<Route path="/signup" render={(props) => {
+								return <SignUp {...props} onSignUpSuccess={this.onLoginSuccess.bind(this)} />
+							}} />
 
-					<Route path="/logout" render={(props) => {
-						return <LogOut onLogOut={this.logOut.bind(this)} />
-					}} />
+							<Route path="/posts/new" render={(routeProps) => {
+								return currentUser
+									? <NewPost {...routeProps} />
+									: <Redirect to="/login" />
+							}} />
 
-					{/* the sign up component takes an 'onSignUpSuccess' prop which will perform the same thing as onLoginSuccess: set the state to contain the currentUser */}
-					<Route path="/signup" render={(props) => {
-						return <SignUp {...props} onSignUpSuccess={this.onLoginSuccess.bind(this)} />
-					}} />
-
-					<Route path="/posts/new" render={(routeProps) => {
-						return currentUser
-							? <NewPost {...routeProps} />
-							: <Redirect to="/login" />
-					}} />
-
-					<Route path="/posts/:id" render={(routeProps) => {
-						return currentUser
-							? <PostView {...routeProps} />
-							: <Redirect to="/login" />
-					}} />
+							<Route path="/posts/:id" render={(routeProps) => {
+								return currentUser
+									? <PostView {...routeProps} />
+									: <Redirect to="/login" />
+							}} />
 
 
-					<Route path="/posts" component={Posts} />
-					
-					<Route path="/users/:id" render={(routeProps)=>{
-						return currentUser
-						? <UserShow onAddMentorSuccess={this.loadCurrentUser.bind(this)} currentUser={currentUser} {...routeProps}/>
-						: <Redirect to="/login" />
-					}} />
+							<Route path="/posts" component={Posts} />
+							
+							<Route path="/users/:id" render={(routeProps)=>{
+								return currentUser
+								? <UserShow onAddOrRemoveMentorSuccess={this.loadCurrentUser.bind(this)} currentUser={currentUser} {...routeProps}/>
+								: <Redirect to="/login" />
+							}} />
 
-					<Route path="/users" render={() => {
-						return currentUser
-							? <Users />
-							: <Redirect to="/login" />
-					}} />
+							<Route path="/users" render={() => {
+								return currentUser
+									? <Users />
+									: <Redirect to="/login" />
+							}} />
 
-					<Route path="/profile" render={(props) => {
-						return currentUser
-							? <UserProfile onDeleteAccount={this.logOut.bind(this)}{...props}/>
-							: <Redirect to="/login" />
-					}} />
+							<Route path="/profile" render={(props) => {
+								return currentUser
+									? <UserProfile onDeleteAccount={this.logOut.bind(this)}{...props}/>
+									: <Redirect to="/login" />
+							}} />
 
-					<Route path="/" render={(props)=>{
-						return <Home currentUser={currentUser}{...props} onLoginSuccess={this.onLoginSuccess.bind(this)} />
-					}}  />
+							<Route path="/" render={(props)=>{
+								return <Home currentUser={currentUser}{...props} onLoginSuccess={this.onLoginSuccess.bind(this)} />
+							}}  />
 
-				</Switch>
-				
+						</Switch>
+					)
+				}
 			</div>
 			<Footer />
 			</div>

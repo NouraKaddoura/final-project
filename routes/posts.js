@@ -6,6 +6,7 @@ const
 
 postsRouter.get('/', (req,res) => {
     Post.find({}).populate('user').exec((err, posts) => {
+        console.log(posts)
         res.json(posts)
     })
 })

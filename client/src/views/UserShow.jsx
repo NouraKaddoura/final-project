@@ -26,12 +26,11 @@ class UserShow extends React.Component {
         evt.preventDefault()
         const mentorId = this.props.match.params.id
         httpClient.addMentor(mentorId).then((serverResponse)=>{
-            console.log(serverResponse.data)
             this.setState({
                 user: serverResponse.data.mentor
             })
 
-            this.props.onAddMentorSuccess()
+            this.props.onAddOrRemoveMentorSuccess()
         })
     }
 
@@ -41,14 +40,22 @@ class UserShow extends React.Component {
         // console.log('clicked')
         // console.log(mentorId)
         httpClient.deleteMentor(mentorId).then((serverResponse)=>{
-            console.log(serverResponse)
+            this.setState({
+                user: serverResponse.data.mentor
+            })
+            this.props.onAddOrRemoveMentorSuccess()
         })
     }
 
 	render() {
         const { match: { params: { id } }, currentUser } = this.props
         const { user } = this.state   
-        console.log(currentUser)
+        if(user && currentUser) {
+            console.log("CURRENT USER:")
+            console.log(currentUser)
+            console.log("MENTOR:")
+            console.log(user)
+        }
         if(!user) return <h2>Loading...</h2>
 		return (
 			<div style={{backgroundColor:'white', height:'480px', width:'550px', textAlign: 'center', margin: '0 auto'}} className="UsersShowPage">	
@@ -66,11 +73,11 @@ class UserShow extends React.Component {
                 {user.isMentor
                     ? (
                         <span>
-                        {/* {this.props.currentUser.mentors.includes(id)
+                        {user.mentees.includes(currentUser._id)
                           ? <Button style={{marginLeft:'50px'}} onClick={this.onClickDeleteMentor.bind(this)}>Remove Mentor</Button>
                           : <Button style={{marginLeft:'50px'}} onClick={this.onClickAddMentor.bind(this)}>Add Mentor</Button>
-                        } */}
-                        <Button style={{  marginBottom: '20px'}} onClick={this.onClickAddMentor.bind(this)}>Add Mentor</Button>
+                        }
+                        {/* <Button style={{  marginBottom: '20px'}} onClick={this.onClickAddMentor.bind(this)}>Add Mentor</Button> */}
                         
                     <h4>Bio:</h4>
                     {/* <div style={{ display: 'flex', marginLeft:'50px', order:'3', overflow: 'scroll'}}className="menteesList">       

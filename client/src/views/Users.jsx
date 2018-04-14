@@ -8,7 +8,7 @@ import { Row, Col } from 'reactstrap';
 class Users extends React.Component {
 	state = { currentUser: httpClient.getCurrentUser(),
 	users:[],
-	meetups:[] }
+	meetups: null }
 
 	componentDidMount() {
         httpClient.getAllUsers().then((serverResponse)=> {
@@ -32,20 +32,26 @@ class Users extends React.Component {
 			
 			<div style={{height: '500px', overflow: 'scroll'}} className="usersProfile">
 
-				<div style={{float: 'right', backgroundColor:'white', width:'500px', textAlign:'center', paddingRight:'20px'}}className="localMeetups">
-
-						<h2>Local MeetUps:</h2>
-							{meetups.map((m)=>{
-								return <ul style={{listStyle: 'none'}}>
-										 <li><Link style={{color:'teal'}} to={m.link}>{m.name}</Link></li> <img style={{width:'250px', height: '150px'}} src={m.key_photo.photo_link}/>
-										 	<ul style={{listStyle:'none'}}>
-												 <li>Organized by: {m.organizer.name}</li>
-												 
-											</ul> 	
-										</ul>
-										
-							})}
-				</div>
+			<div style={{float: 'right', backgroundColor:'white', width:'500px', textAlign:'center', paddingRight:'20px'}}className="localMeetups">
+				{!meetups
+					? <h3>Loading...</h3>
+					: 	(
+							<div>
+								<h2>Local MeetUps:</h2>
+								{meetups.map((m)=>{
+									return <ul style={{listStyle: 'none'}}>
+											<li><Link style={{color:'teal'}} to={m.link}>{m.name}</Link></li> <img style={{width:'250px', height: '150px'}} src={m.key_photo.photo_link}/>
+												<ul style={{listStyle:'none'}}>
+													<li>Organized by: {m.organizer.name}</li>
+													
+												</ul> 	
+											</ul>
+											
+								})}
+							</div>
+						)
+					}
+			</div>
 
 			<div className="UsersIndexPage">	
 			<h2>MentorHub Users:</h2>

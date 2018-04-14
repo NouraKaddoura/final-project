@@ -27,6 +27,11 @@ app.use(express.static(`${__dirname}/client/build`))
 app.use(logger('dev'))
 app.use(bodyParser.json())
 
+
+// app.use((req, res, next) => {
+// 	setTimeout(next, 1000)
+// })
+
 app.get('/api', (req, res) => {
 	res.json({message: "API root."})
 })
