@@ -2,9 +2,10 @@ import React from 'react'
 import httpClient from '../httpClient'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
+		
 class SignUp extends React.Component {
 	state = {
-		fields: { name: '', email: '', picture: '', password: '', isMentor: false},
+		fields: { name: '', email: '', picture: '', password: '', bio:'', isMentor: false},
 		errorMessage: null
 	}
 
@@ -23,7 +24,7 @@ class SignUp extends React.Component {
 		console.log(this.state.fields)
 		evt.preventDefault()
 		httpClient.signUp(this.state.fields).then(user => {
-			this.setState({ fields: { name: '', email: '', picture: '', password: '', isMentor: false } })
+			this.setState({ fields: { name: '', email: '', picture: '', password: '', bio:'', isMentor: false } })
 			if(user) {
 				this.props.onSignUpSuccess(user)
 				// this.props.history.push('/')
@@ -38,7 +39,7 @@ class SignUp extends React.Component {
 	}
 
 	render() {
-		const { name, email, password, picture } = this.state.fields
+		const { name, email, password, picture, zip, bio } = this.state.fields
 	
 		return (
 			<div style={{margin: 'auto'}} className='SignUp'>
@@ -59,6 +60,10 @@ class SignUp extends React.Component {
 						<FormGroup>
 						<Label for="picture"> Profile Picture</Label>
 							<Input type="text" placeholder="Picture URL" name="picture" value={picture} />
+						</FormGroup>
+						<FormGroup>
+						<Label for="bio">Bio</Label>
+							<Input type="text" placeholder="bio" name="bio" value={bio} />
 						</FormGroup>
 						<FormGroup>
 						<Label for="password">Password</Label>

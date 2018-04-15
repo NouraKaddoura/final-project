@@ -7,6 +7,7 @@ const
 		password: { type: String, required: true },
 		picture: {type: String, default: "http://www.oidhreachtlca.ie/images/user.png"},
 		isMentor: { type: Boolean },
+		bio: String,
 		mentees: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
 		mentors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
 	})

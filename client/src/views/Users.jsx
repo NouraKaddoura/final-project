@@ -61,7 +61,7 @@ class Users extends React.Component {
 						{row.map((u)=>{
                     		return (
 								<Col xs="3" key={u._id}>
-									<Link key={u._id} to={`/users/${u._id}`}>
+									<Link style={{color: 'white'}} key={u._id} to={`/users/${u._id}`}>
 										{u.name}</Link>
 										</Col> 
                 					)

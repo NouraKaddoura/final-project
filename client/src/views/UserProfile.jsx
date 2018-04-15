@@ -65,8 +65,8 @@ handleDeleteClick(){
 		if(!user) return <h1>Loading...</h1>
 		return (
 			<div className="profilePage">	
-			<h1 style={{color:'rgba(0,0,0,.8)', margin: '10px'}}>Welcome Back, {user.name}</h1>
-			<div style={{paddingLeft: '104px'}}className="profilepic"><img style={{width: '200px'}}src={user.picture} alt="userpicture"/></div>
+			<h1 style={{color:'white', margin: '10px',  backgroundColor:'rgba(0,128,128, .8)', padding: '10px', boxShadow: '0px 8px 8px rgba(0, 0, 0, .5)'}}>Welcome Back, {user.name}</h1>
+			<div style={{paddingLeft: '104px'}}className="profilepic"><img style={{width: '200px', boxShadow: '0px 8px 8px rgba(0, 0, 0, .6)'}}src={user.picture} alt="userpicture"/></div>
 			
 			
 

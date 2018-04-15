@@ -58,12 +58,12 @@ class UserShow extends React.Component {
         }
         if(!user) return <h2>Loading...</h2>
 		return (
-			<div style={{backgroundColor:'white', height:'480px', width:'550px', textAlign: 'center', margin: '0 auto'}} className="UsersShowPage">	
+			<div style={{backgroundColor:'white', height:'480px', width:'550px', textAlign: 'center', margin: '0 auto', boxShadow: '0px 8px 8px rgba(0, 0, 0, .6)'}} className="UsersShowPage">	
             <h1>{this.state.addedMessage}</h1>
            
             <div  className="UsersShowBox" >
-            <h2 style={{textAlign: 'center'}}>User: {user.name}</h2>
-              <img style={{width:'200px', marginBottom:'10px'}} className="pic" src={user.picture}/>
+            <h2 style={{textAlign: 'center', backgroundColor:'rgb(0,128,128)', color: 'white', padding: '5px', boxShadow: '0px 8px 8px rgba(0, 0, 0, .5)'}}>User: {user.name}</h2>
+              <img style={{width:'200px', marginBottom:'10px', boxShadow: '0px 8px 8px rgba(0, 0, 0, .5)'}} className="pic" src={user.picture}/>
         
                
          
@@ -80,7 +80,7 @@ class UserShow extends React.Component {
                         {/* <Button style={{  marginBottom: '20px'}} onClick={this.onClickAddMentor.bind(this)}>Add Mentor</Button> */}
                         
                         <h4>Bio:</h4>
-               
+                        <p>{user.bio}</p>
                    
 
                         </span>
@@ -89,9 +89,11 @@ class UserShow extends React.Component {
                         <span>
                         
                             {/* <Button onClick={this.onClickAddMentor.bind(this)}>Add Mentee</Button> */}
-                        <h4 style={{ marginBottom: '20px'}}>Mentee Looking for Mentor</h4> 
+                        <h4 style={{ marginBottom: '20px', backgroundColor:'rgba(0,128,128, .4)'}}>Mentee Looking for Mentor</h4> 
+                        
                         <h4>Bio:</h4>
-                  
+                        <p>{user.bio}</p>
+
                         </span>
                         
                     )
