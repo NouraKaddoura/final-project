@@ -1,10 +1,23 @@
-# React Application with JWT Authentication
+# MentorHub [link](https://secret-plains-23506.herokuapp.com/)
+
+![Link](https://i.imgur.com/3N5kp4W.jpg)
 
 ### Overview
 
-This is an example application that serves an ExpressJS JSON api to a React client application. The React application is configured for a basic JWT authentication flow **WITHOUT** using redux. Great for those of you that are somewhat familiar with Node, Express, and Mongoose, but want to see an implementation of React + React Router with JWT authentication.
+MentorHub is designed to connect mentees with mentors in areas of growth and development. It has a unique functionality of having all users comment and interact with each other while linking the users to other resources such as meetups in their area from the site Meetup.com. The vision is to help this app create community and connect people who seek menorship virtually and also have a forum to write their questions, comments, or advice to other members. 
 
-The React client app could easily be restructured to keep current user information in a Redux Store. Give it a shot!
+* This is a full-stack application (MERN STACK) with a restful API. 
+
+### During the Planning Stage:
+
+At first I had two models, one for mentor and one for mentees but then discovered it would simplify the complexity of the project to have just one model with a Boolean of whether or not the user was a mentor. 
+
+![link](https://i.imgur.com/908qabL.png)
+![link](https://i.imgur.com/F32piI4.png)
+
+### The Approach I took to managing each task:
+Daily To Do list:
+![link](https://i.imgur.com/XXz9O7W.jpg)
 
 ### Installation + Development
 
@@ -13,55 +26,16 @@ The React client app could easily be restructured to keep current user informati
 2. run `npm install` from the cloned repo directory.
 
 3. create a `.env` file at the root of the application, adjacent to `server.js`.
+  * It's recommended that you run the api server on port 3001 while developing locally, as  the client app will default to port 3000.
+5. Intialize `mongod` 
+6. Initialize `nodemon`.
+7. Next, in the client application. `cd client`
+    * run `npm install`
+    * run `npm start` to boot up the client application.
 
-   *The only environment variable you **have** to declare in development is `JWT_SECRET`*
-
-   In the `.env` file, you can declare the following environment variables: `JWT_SECRET`, `MONGODB_URI`, and `PORT`. For example:
-
-   ```
-   JWT_SECRET=BOOOOOOOOOOOOOM
-   MONGODB_URI=mongodb://localhost/react-express-jwt
-   PORT=3001
-   ```
-
-
-
-4. It's recommended that you run the api server on port 3001 while developing locally, as the client app will default to port 3000.
-5. Make sure `mongod` is running by running… ahem… `mongod`
-6. From that point you can run the api server either by using `nodemon` or just running `node server.js`
-7. Now for the client application. `cd client`
-8. Install the client app's dependencies with `npm install`
-9. From the client directory, run `npm start` to boot up the client application.
-10. $$$ Profit
+8. Start using the application and customize as you wish!
 
 ### Usage
-
-It's common to identify the user making an authenticated request on the server side. In this application, the `verifyToken` middleware (declared in `/serverAuth.js`) decodes a provided token, and makes sure the request is coming from a valid user. When the user is validated, it is added to the `req` object as `req.user`. 
-
-Here's an example of how you can access the 'current user' from the server side app, assuming a user is logged in and sending an authenticated request:
-
-```javascript
-const express = require('express')
-const mySpecialRouter = new express.Router()
-
-// JWT AUTH MIDDLEWARE:
-const { verifyToken }  = require('../serverAuth.js')
-
-const Comment = require('../models/Comment.js')
-
-// all routes declared after this middleware require a token
-mySpecialRouter.use(verifyToken)
-mySpecialRouter.post("/comments", (req, res) => {
-  // since this route succeeds 'verifyToken', it has the current user in req.user
-  // so we can easily associate new mongo documents to the current user:
-  Comment.create({ ...req.body, user: req.user }, (err, comment) => {
-    if(err) return console.log(err)
-    res.json({ success: true, message: "Comment created.", comment })
-  })
-})
-
-module.exports = mySpecialRouter
-```
 
 
 
