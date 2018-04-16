@@ -13,7 +13,7 @@ MentorHub is designed to connect mentees with mentors in areas of growth and dev
 At first I had two models, one for mentor and one for mentees but then discovered it would simplify the complexity of the project to have just one model with a Boolean of whether or not the user was a mentor. 
 
 ![link](https://i.imgur.com/908qabL.png)
-![link](https://i.imgur.com/F32piI4.png)
+![link](https://i.imgur.com/gnu1twK.png)
 
 ### The Approach I took to managing each task:
 Daily To Do list:
@@ -35,18 +35,24 @@ Daily To Do list:
 
 8. Start using the application and customize as you wish!
 
-### Usage
-
-
-
 ### Technologies
 
 - NodeJS + Express + Mongoose on the back
 - React client application on the front
 - React Router 4.*
-- Milligram CSS so it doesn't look like garbage
+- Reactstrap (Bootstrap for React)
 - JSON Web Token authentication flow
+- Axios 
+- lodash
+- Bcrypt
 
-### Important Notes
+### User Stories:
 
-- While the Mongoose user schema enforces email uniqueness, there's no handler for duplicate user emails on the client side. (A user wouldn't know why they couldn't create their account if they came across this scenario).
+* As a User, I want to be able to look through a variety of posts.
+* As a User, I want to be able to add a mentor. 
+* As a User, I want to be able to delete a mentor. 
+* As a User, I want to be able to customize my profile and view other profiles. 
+* As a User, I want to be able to comment on posts.
+* As a User, I want to be able to know why I can't sign up or Login. 
+* As a User, I want to find local meetups where I could connect with more mentors. 
+
